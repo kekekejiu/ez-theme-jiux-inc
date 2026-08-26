@@ -1,0 +1,74 @@
+/**
+ * 新手引导（Shepherd）主题化样式，匹配站点主题色
+ */
+
+.shepherd-element.ez-tour-step {
+  max-width: 360px;
+  border-radius: 14px;
+  background: var(--card-bg, #fff);
+  color: var(--text-color, #1f2937);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.22);
+  border: 1px solid rgba(var(--theme-color-rgb), 0.18);
+}
+
+.shepherd-element.ez-tour-step .shepherd-arrow::before {
+  background: var(--card-bg, #fff);
+}
+
+.ez-tour-step .shepherd-header {
+  padding: 16px 18px 0;
+  background: transparent;
+  border-radius: 14px 14px 0 0;
+}
+
+.ez-tour-step .shepherd-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-color, #1f2937);
+}
+
+.ez-tour-step .shepherd-text {
+  padding: 10px 18px 4px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-secondary, #4b5563);
+}
+
+.ez-tour-step .shepherd-footer {
+  padding: 12px 18px 16px;
+  gap: 8px;
+}
+
+.ez-tour-step .shepherd-button {
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 8px;
+  background: var(--theme-color);
+  color: #fff;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.ez-tour-step .shepherd-button:not(:disabled):hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+  background: var(--theme-color);
+}
+
+.ez-tour-step .shepherd-button.ez-tour-btn-secondary {
+  background: rgba(var(--theme-color-rgb), 0.1);
+  color: var(--theme-color);
+}
+
+.ez-tour-step .shepherd-button.ez-tour-btn-secondary:not(:disabled):hover {
+  background: rgba(var(--theme-color-rgb), 0.18);
+}
+
+.ez-tour-step .shepherd-cancel-icon {
+  color: var(--text-secondary, #9ca3af);
+  font-size: 20px;
+}
+
+.shepherd-modal-overlay-container.shepherd-modal-is-visible {
+  opacity: 0.55;
+}
