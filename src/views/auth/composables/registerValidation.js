@@ -7,7 +7,7 @@ export const buildRegisterPayload = ({ formData, config, captchaResponse }) => {
   };
 
   if (config.is_email_verify === 1) {
-    payload.email_code = parseInt(formData.emailCode || formData.verificationCode);
+    payload.email_code = String(formData.emailCode || formData.verificationCode || '').trim();
   }
 
   if (formData.inviteCode) {

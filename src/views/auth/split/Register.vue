@@ -1540,7 +1540,7 @@ export default {
 
         if (config.is_email_verify === 1) {
 
-          registerData.email_code = parseInt(formData.verificationCode);
+          registerData.email_code = String(formData.verificationCode || '').trim();
 
         }
 

@@ -1474,7 +1474,7 @@ export default {
 
           password: formData.newPassword,
 
-          email_code: parseInt(formData.verificationCode)
+          email_code: String(formData.verificationCode || '').trim()
 
         };
 
