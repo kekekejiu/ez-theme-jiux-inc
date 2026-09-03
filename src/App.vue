@@ -60,11 +60,10 @@
     <!-- 自定义鼠标右键菜单 -->
     <CustomContextMenu />
     
-    <!-- 客服图标 -->
+    <!-- 客服组件 -->
     <CustomerServiceIcon v-if="$route.path !== '/customer-service'" />
-    
-    <!-- Crisp嵌入组件（第二种客服系统方案） -->
-    <CrispEmbed v-if="customerServiceConfig.embedMode === 'embed'" />
+    <CrispEmbed v-if="customerServiceConfig.type === 'crisp' && customerServiceConfig.embedMode === 'embed'" />
+    <ThirdPartyCustomerService v-if="customerServiceConfig.type === 'other'" />
     
     <!-- 资源预加载组件 -->
     <ResourcePreloader />
@@ -93,6 +92,7 @@ import BackToTop from '@/components/common/BackToTop.vue';
 import CustomContextMenu from '@/components/common/CustomContextMenu.vue';
 import CustomerServiceIcon from '@/components/common/CustomerServiceIcon.vue';
 import CrispEmbed from '@/components/common/CrispEmbed.vue';
+import ThirdPartyCustomerService from '@/components/common/ThirdPartyCustomerService.vue';
 import ResourcePreloader from '@/components/common/ResourcePreloader.vue';
 import { IconGift } from '@tabler/icons-vue';
 import NProgress from 'nprogress';
@@ -120,6 +120,7 @@ export default {
     CustomContextMenu,
     CustomerServiceIcon,
     CrispEmbed,
+    ThirdPartyCustomerService,
     ResourcePreloader,
     IconGift
   },

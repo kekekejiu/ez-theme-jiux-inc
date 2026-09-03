@@ -582,17 +582,13 @@ export const config  = {
         enabled: true,
 
         // 客服系统类型: 'crisp' 或 'other'
-        // 注意：当客服类型为crisp时，系统会自动向Crisp传递用户数据
-        // 包括：用户邮箱、套餐名称、到期时间、可用流量、用户余额
-        type: 'crisp',
+        // SaleSmartly 使用 other 模式，由客服页面动态加载官方脚本
+        type: 'other',
 
-        // 客服系统JS代码，请将您的客服系统提供的嵌入代码粘贴在这里
-        // Crisp 模式下组件只从这里正则提取 CRISP_WEBSITE_ID，无需另行插入 script
-        customHtml: '<script type="text/javascript">window.$crisp=[];window.CRISP_WEBSITE_ID="8d553664-803e-4490-ba4f-447f929f9e52";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();<\/script>',
+        // 客服系统JS代码
+        customHtml: '<script src="https://plugin-code.salesmartly.com/js/project_804576_833225_1786742421.js"><\/script>',
 
-        // 客服系统嵌入模式: 'popup'=弹出式页面, 'embed'=嵌入到每个页面
-        // 'popup'模式: 点击客服图标会跳转到单独的客服页面
-        // 'embed'模式: 客服窗口直接嵌入到每个页面中(仅支持Crisp)
+        // 全站加载 SaleSmartly 官方脚本，由其自身气泡提供客服入口
         embedMode: 'embed',
 
         // 是否在未登录状态下也显示客服图标
