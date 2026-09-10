@@ -41,7 +41,8 @@ export default {
     const shouldShow = computed(() => {
       if (!CUSTOMER_SERVICE_CONFIG.enabled) return false;
       
-      if (CUSTOMER_SERVICE_CONFIG.embedMode === 'embed' && CUSTOMER_SERVICE_CONFIG.type === 'crisp') {
+      // Embedded providers use their own chat bubble; avoid a duplicate theme button.
+      if (CUSTOMER_SERVICE_CONFIG.embedMode === 'embed' || CUSTOMER_SERVICE_CONFIG.type === 'other') {
         return false;
       }
       

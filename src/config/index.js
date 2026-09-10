@@ -587,9 +587,7 @@ export const config  = {
         // 旧客服代码已移除；Chatwoot 由 index.html 全局加载
         customHtml: '',
 
-        // 客服系统嵌入模式: 'popup'=弹出式页面, 'embed'=嵌入到每个页面
-        // 'popup'模式: 点击客服图标会跳转到单独的客服页面
-        // 'embed'模式: 客服窗口直接嵌入到每个页面中(仅支持Crisp)
+        // 全站加载 SaleSmartly 官方脚本，由其自身气泡提供客服入口
         embedMode: 'embed',
 
         // 是否在未登录状态下也显示客服图标
