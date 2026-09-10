@@ -59,6 +59,23 @@
 </head>
 <body>
 <div id="app"></div>
+<script>
+  window.chatwootSettings = { locale: "zh_CN", position: "right", type: "standard", hideMessageBubble: false };
+  (function (d, t) {
+    var BASE_URL = "https://103.118.41.128:11186";
+    var g = d.createElement(t), s = d.getElementsByTagName(t)[0];
+    g.src = BASE_URL + "/packs/js/sdk.js";
+    g.async = true;
+    s.parentNode.insertBefore(g, s);
+    g.onload = function () { window.chatwootSDK.run({ websiteToken: "TYwKhMLwEoiqiGnsELLxucEU", baseUrl: BASE_URL }); };
+  })(document, "script");
+  window.addEventListener("chatwoot:ready", function () {
+    var query = new URLSearchParams(window.location.search);
+    window.$chatwoot.setCustomAttributes({ current_page_url: window.location.href, current_page_title: document.title,
+      landing_referrer: document.referrer || "直接访问", user_agent: navigator.userAgent,
+      utm_source: query.get("utm_source") || "", utm_medium: query.get("utm_medium") || "", utm_campaign: query.get("utm_campaign") || "" });
+  });
+</script>
 <script type="module" src="/src/main.js"></script>
 </body>
 </html>
