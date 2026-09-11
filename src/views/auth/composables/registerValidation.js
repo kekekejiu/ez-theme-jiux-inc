@@ -1,4 +1,5 @@
 import { isValidEmail } from '@/utils/validators';
+import { sanitizeInviteCode } from '@/utils/inviteCode';
 
 export const buildRegisterPayload = ({ formData, config, captchaResponse }) => {
   const payload = {
@@ -10,8 +11,9 @@ export const buildRegisterPayload = ({ formData, config, captchaResponse }) => {
     payload.email_code = String(formData.emailCode || formData.verificationCode || '').trim();
   }
 
-  if (formData.inviteCode) {
-    payload.invite_code = formData.inviteCode;
+  const inviteCode = sanitizeInviteCode(formData.inviteCode);
+  if (inviteCode) {
+    payload.invite_code = inviteCode;
   }
 
   if (config.is_recaptcha === 1 && captchaResponse) {

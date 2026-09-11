@@ -600,6 +600,8 @@ import DomainAuthAlert from '@/components/common/DomainAuthAlert.vue';
 
 import { CAPTCHA_CONFIG, AUTH_CONFIG } from '@/utils/baseConfig';
 
+import { extractInviteCodeFromUrl, sanitizeInviteCode } from '@/utils/inviteCode';
+
 import AuthPopup from '@/components/auth/AuthPopup.vue';
 
 import { shouldShowAuthPopup } from '@/utils/authPopupState';
@@ -1547,25 +1549,23 @@ export default {
 
         if (urlParams.has('code')) {
 
-          formData.inviteCode = urlParams.get('code');
+          formData.inviteCode = sanitizeInviteCode(urlParams.get('code'));
 
           inviteCodeFromUrl.value = true;
 
         } else if (hashParams.has('code')) {
 
-          formData.inviteCode = hashParams.get('code');
+          formData.inviteCode = sanitizeInviteCode(hashParams.get('code'));
 
           inviteCodeFromUrl.value = true;
 
         } else {
 
-          const fullUrl = window.location.href;
+          const codeFromUrl = extractInviteCodeFromUrl();
 
-          const codeMatch = fullUrl.match(/[?&]code=([^&]+)/);
+          if (codeFromUrl) {
 
-          if (codeMatch && codeMatch[1]) {
-
-            formData.inviteCode = codeMatch[1];
+            formData.inviteCode = codeFromUrl;
 
             inviteCodeFromUrl.value = true;
 
