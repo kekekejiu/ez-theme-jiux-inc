@@ -557,6 +557,13 @@ export default {
 
     
 
+    // 后端(V2Board/Xboard)OrderSave 允许的周期白名单。
+    // 非法或空值会让后端执行 $plan[""]，抛出 "Undefined array key """。
+    const VALID_PERIODS = [
+      'month_price', 'quarter_price', 'half_year_price', 'year_price',
+      'two_year_price', 'three_year_price', 'onetime_price', 'reset_price'
+    ];
+
     const selectedPriceType = ref('');
 
     
@@ -842,7 +849,7 @@ export default {
 
       try {
 
-        const response = await checkCoupon(couponCode.value, plan.value.id);
+        const response = await checkCoupon(couponCode.value, plan.value.id, selectedPriceType.value);
 
         
 
@@ -983,6 +990,15 @@ export default {
 
     const executeOrderSubmission = async () => {
 
+      // 兜底：周期为空或非法时不发请求，否则后端 $plan[""] 会抛
+      // "Undefined array key """，用户只会看到一句看不懂的 PHP 报错。
+      const period = selectedPriceType.value;
+
+      if (!period || !VALID_PERIODS.includes(period)) {
+        showToast(t('order.select_period'), 'error');
+        return;
+      }
+
       loading.submitting = true;
 
       
@@ -993,7 +1009,7 @@ export default {
 
           plan_id: Number(plan.value.id),
 
-          period: selectedPriceType.value
+          period: period
 
         };
 
@@ -1107,9 +1123,18 @@ export default {
 
           
 
-          if (route.query.period && plan.value[route.query.period] !== null) {
+          // 仅接受白名单内且该套餐确实开放的周期；
+          // 否则回退到第一个可用周期，避免把空/非法值提交给后端。
+          const periodFromUrl = route.query.period;
 
-            selectedPriceType.value = route.query.period;
+          if (
+            periodFromUrl &&
+            VALID_PERIODS.includes(periodFromUrl) &&
+            plan.value[periodFromUrl] !== null &&
+            plan.value[periodFromUrl] !== undefined
+          ) {
+
+            selectedPriceType.value = periodFromUrl;
 
           } else {
 
